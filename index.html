@@ -118,5 +118,13 @@
       document.body.appendChild(script);
 
     </script>
+      <script type="text/javascript">
+      function playerLost(score) {
+        // Envoyer le message à Flutter via le canal FlutterChannel
+        if (window.FlutterChannel) {
+          window.FlutterChannel.postMessage(score.toString());
+        }
+      }
+    </script>
   </body>
 </html>
