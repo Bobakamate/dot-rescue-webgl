@@ -106,6 +106,7 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+                window.unityInstance = unityInstance;
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
@@ -118,5 +119,13 @@
       document.body.appendChild(script);
 
     </script>
+       <script type="text/javascript">
+        function playerLost(score) {
+          // Envoyer le message à Flutter via le canal FlutterChannel
+          if (window.FlutterChannel) {
+            window.FlutterChannel.postMessage(score.toString());
+          }
+        }
+      </script>
   </body>
 </html>
